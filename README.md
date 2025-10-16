@@ -1,5 +1,6 @@
 # 🎭 Random Joke API
 FastAPI proxy over Official Joke API with normalized responses, simple validation, and clean error handling.
+
 Live demo: local only (dev) Docs: http://127.0.0.1:8000/docs
 
 # 🚀 Tech Stack
@@ -78,3 +79,4 @@ pytest -q
 All external calls are mocked with respx (no real internet).
 
 Minimal suite covers happy paths + 400/404/502/504.
+
