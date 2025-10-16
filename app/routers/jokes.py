@@ -1,6 +1,9 @@
 from fastapi import APIRouter
 from app.services.jokes_client import get_random as get_random_joke
 from app.services.jokes_client import get_random_jokes as get_random_jokes
+from app.services.jokes_client import get_random_n as get_random_n_service
+from app.services.jokes_client import get_type_random as get_type
+from app.services.jokes_client import get_by_id as get_by_id
 
 from app.schemas import Joke, JokesList, Error
 
@@ -14,14 +17,15 @@ def get_random():
 def get_ten():
     return get_random_jokes("/random_ten")
 
-@router.get("/random/{n}")
-def get_random_n():
-    return {"random_n": "ok"}
+@router.get("/random/{n}", response_model=JokesList)
+def get_random_n_handler(n: int):
+    return get_random_n_service(n)
 
-@router.get("/type/{n}/random")
-def get_random_joke_type():
-    return {"random_type_joke": "ok"}
+@router.get("/type/{joke_type}/random", response_model=Joke)
+def get_random_type_handler(joke_type: str):
+    return get_type(f"{joke_type}")
 
 @router.get("/{id}")
-def get_joke_id():
-    return {"id": "ok"}
+def get_by_id_handler(id: int):
+    return get_by_id(id)
+
